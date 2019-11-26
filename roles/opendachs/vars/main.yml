@@ -1,0 +1,50 @@
+# Git repository
+git:
+  dest: "/home/{{ ansible_user }}/productive/opendachs"
+  repo: "https://github.com/PascalinDeZO/OpenDACHS.git"
+  version: master
+
+
+# FTP module configuration
+ftp:
+  host: "zo-moth.zo.uni-heidelberg.de"
+  user: boa.opendachs
+  passwd: dZYajCq2SaPe8.vDGZ
+  retr: openDachs/submitted
+
+
+# SMTP module configuration
+smtp:
+  host: "mail.urz.uni-heidelberg.de"
+  port: 587
+  from: "watson@zo.uni-heidelberg.de"
+  reply_to: "watson@zo.uni-heidelberg.de"
+
+
+# SQLite module configuration
+sqlite:
+  database: opendachs.db
+  table: tickets
+  ticket: "TEXT PRIMARY KEY"
+  user: TEXT
+  archive: TEXT
+  metadata: TEXT
+  flag: TEXT
+  timestamp: TIMESTAMP
+
+
+# OpenDACHS URLs
+opendachs:
+  webrecorder: "https://watson.zo.uni-heidelberg.de"
+  confirm: "http://projects.zo.uni-heidelberg.de/opendachs/form/update.php?flag=confirmed&ticket="
+  accept: "http://projects.zo.uni-heidelberg.de/opendachs/form/update.php?flag=accepted&ticket="
+  deny: "http://projects.zo.uni-heidelberg.de/opendachs/form/update.php?flag=denied&ticket="
+
+
+# Python packages
+packages:
+  - bs4
+  - cfscrape
+  - Jinja2
+  - requests
+  - warcio

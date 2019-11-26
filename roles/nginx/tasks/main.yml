@@ -1,0 +1,56 @@
+---
+- name: install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: ensure ssl-cert group exists
+  group:
+    name: ssl-cert
+    state: present
+
+- name: add nginx to ssl-cert group
+  user:
+    name: www-data
+    append: yes
+    groups: ssl-cert
+
+- name: copy new default site
+  copy:
+    src: default
+    dest: /etc/nginx/sites-available/default
+  notify: restart nginx
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: set up ssl
+  include_role:
+    name: dehydrated
+
+- name: copy wrhost template
+  template:
+    src: wrhost.j2
+    dest: '/etc/nginx/sites-available/{{ item.filename }}'
+  with_items: "{{ nginx_vhosts }}"
+  notify: restart nginx
+
+- name: enable only our sites
+  file:
+    path: '/etc/nginx/sites-enabled/'
+    state: absent
+
+- name: enable only our sites
+  file:
+    path: '/etc/nginx/sites-enabled'
+    state: directory
+
+- name: enable only our sites
+  file:
+    path: '/etc/nginx/sites-enabled/{{ item }}'
+    src: '/etc/nginx/sites-available/{{ item }}'
+    state: link
+  with_items:
+    - default
+    - '{{ wr_app_host }}'
+  notify: restart nginx

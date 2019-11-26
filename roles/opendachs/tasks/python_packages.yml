@@ -1,0 +1,4 @@
+# install Python packages
+- name: install Python packages
+  pip:
+    name: "{{ packages }}"

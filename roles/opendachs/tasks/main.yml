@@ -1,0 +1,20 @@
+# install Python packages
+- name: install Python packages
+  include_tasks: python_packages.yml
+
+
+# clone Git repository
+- include_tasks: repository.yml
+
+
+# create crontab entry (run once an hour)
+- name: create crontab entry
+  cron:
+    minute: 0
+    job: "cd {{ git['dest'] }}; python3 main.py config/ftp.ini config/smtp.ini config/sqlite.ini"
+    user: "{{ ansible_user }}"
+
+# mount storage
+- name: mount storage
+  command: "mount -t cifs -o username={{ ftp['user'] }},password={{ ftp['passwd'] }},uid={{ ansible_user_uid}},gid={{ ansible_user_gid }} //{{ ftp['host'] }}/opendachs/store {{ git['dest'] }}/storage"
+  become: true

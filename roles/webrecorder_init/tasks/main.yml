@@ -1,6 +1,6 @@
   - name: 'WR Clone'
     git:
-      repo: 'https://github.com/webrecorder/webrecorder'
+      repo: '{{ wr_repo }}'
       dest: '{{ wr_dir }}'
       version: 'master'
 

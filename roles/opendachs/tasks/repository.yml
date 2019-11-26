@@ -1,0 +1,92 @@
+# clone Git repository
+- name: clone Git repository
+  git:
+    dest: "{{ git['dest'] }}"
+    force: yes
+    repo: "{{ git['repo'] }}"
+    version: "{{ git['version'] }}"
+
+
+# create directories
+- name: create directories
+  file:
+    path: "{{ git['dest'] }}/{{ item }}"
+    state: directory
+  loop:
+    - config
+    - storage
+    - storage/logs
+    - tmp
+    - tmp/json_files
+    - tmp/warcs
+
+
+# add INI file (FTP module configuration)
+- name: add INI file
+  ini_file:
+    path: "{{ git['dest'] }}/config/ftp.ini"
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { section: FTP, option: host, value: "{{ ftp['host'] }}" }
+    - { section: FTP, option: user, value: "{{ ftp['user'] }}" }
+    - { section: FTP, option: passwd, value: "{{ ftp['passwd'] }}" }
+    - { section: cmd, option: RETR, value: "{{ ftp['retr'] }}" }
+
+
+# add INI file (SMTP module configuration)
+- name: add INI file
+  ini_file:
+    path: "{{ git['dest'] }}/config/smtp.ini"
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { section: SMTP, option: host, value: "{{ smtp['host'] }}" }
+    - { section: SMTP, option: port, value: "{{ smtp['port'] }}" }
+    - { section: header_fields, option: from, value: "{{ smtp['from'] }}" }
+    - { section: header_fields, option: reply_to, value: "{{ smtp['reply_to'] }}" }
+
+
+# add INI file (SQLite module configuration)
+- name: add INI file
+  ini_file:
+    path: "{{ git['dest'] }}/config/sqlite.ini"
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { section: SQLite, option: database, value: "{{ sqlite['database'] }}" }
+    - { section: SQLite, option: table, value: "{{ sqlite['table'] }}" }
+    - { section: column_defs, option: ticket, value: "{{ sqlite['ticket'] }}" }
+    - { section: column_defs, option: user, value: "{{ sqlite['user'] }}" }
+    - { section: column_defs, option: archive, value: "{{ sqlite['archive'] }}" }
+    - { section: column_defs, option: metadata, value: "{{ sqlite['metadata'] }}" }
+    - { section: column_defs, option: flag, value: "{{ sqlite['flag'] }}" }
+    - { section: column_defs, option: timestamp, value: "{{ sqlite['timestamp'] }}" }
+
+
+# copy e-mail templates
+- name: copy e-mail templates
+  command: "cp -R {{ git['dest'] }}/templates_sample {{ git['dest'] }}/templates"
+
+
+# add OpenDACHS URLs to e-mail templates
+- name: add OpenDACHS URLs to e-mail template 'submitted'
+  lineinfile:
+    line: "{{ item.replace }}"
+    regexp: "{{ item.regexp }}"
+    path: "{{ git['dest'] }}/templates/submitted"
+  with_items:
+    - { replace: "[1] [CONFIRM] {{ opendachs['confirm'] }}", regexp: "^[[]1[]]" }
+    - { replace: "[2] [VISIT] {{ opendachs['webrecorder'] }}", regexp: "^[[]2[]]" }
+- name: add OpenDACHS URLs to e-mail template 'confirmed'
+  lineinfile:
+    line: "{{ item.replace }}"
+    regexp: "{{ item.regexp }}"
+    path: "{{ git['dest'] }}/templates/confirmed"
+  with_items:
+    - { replace: "[1] [VISIT] {{ opendachs['webrecorder'] }}", regexp: "^[[]1[]]" }
+    - { replace: "[2] [ACCEPT] {{ opendachs['accept'] }}", regexp: "^[[]2[]]" }
+    - { replace: "[3] [DENY] {{ opendachs['deny'] }}", regexp: "^[[]3[]]" }

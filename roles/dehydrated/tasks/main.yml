@@ -1,0 +1,33 @@
+---
+- name: install dehydrated
+  apt:
+    name: dehydrated
+    state: present
+
+- name: accept tos
+  command: dehydrated --register --accept-terms
+
+- name: create domains.txt
+  template:
+    src: domains.txt.j2
+    dest: /etc/dehydrated/domains.txt
+  notify: run dehydrated
+
+- name: ensure ssl-cert group exists
+  group:
+    name: ssl-cert
+    state: present
+
+- name: setup directory permissions
+  file:
+    path: /var/lib/dehydrated/certs/
+    mode: g+rx
+    group: ssl-cert
+    recurse: yes
+
+- name: setup directory permissions
+  file:
+    path: /var/lib/dehydrated/certs/{{ cert_key_name }}
+    mode: g+rx
+    group: ssl-cert
+    recurse: yes
