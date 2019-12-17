@@ -1,3 +1,6 @@
+
+proxy_cache_path /tmp/wr_nginx_content_cache    levels=1:2  keys_zone=CONTENT_CACHE:10m max_size=10G;
+
 server {
     listen 80;
 

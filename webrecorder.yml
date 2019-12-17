@@ -2,10 +2,12 @@
   user: zoadmin
   become: yes
   vars:
-    wr_repo: 'https://github.com/webrecorder/webrecorder'
+    wr_repo: 'https://github.com/zo-edv/webrecorder'
     wr_dir: /opt/webrecorder
     wr_app_host: 'cats-dev01.cats.uni-heidelberg.de'
-    wr_content_host: '{{ wr_app_host }}'
+    wr_content_host: 'cats-test.illegal.cloud'
+
+    wr_ldap_uri: 'ldap://ad.uni-heidelberg.de'
 
     wr_remote_browsers:
       - 'chrome:53'

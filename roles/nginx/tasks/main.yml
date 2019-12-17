@@ -28,6 +28,7 @@
   include_role:
     name: dehydrated
 
+
 - name: copy wrhost template
   template:
     src: wrhost.j2
@@ -53,4 +54,5 @@
   with_items:
     - default
     - '{{ wr_app_host }}'
+    - '{{ wr_content_host }}'
   notify: restart nginx

@@ -24,6 +24,8 @@
     with_items:
       - { regexp: 'APP_HOST=', replace: 'APP_HOST={{ wr_app_host }}' }
       - { regexp: 'CONTENT_HOST=', replace: 'CONTENT_HOST={{ wr_content_host }}' }
+      - { regexp: 'LDAP_URI=', replace: 'LDAP_URI={{ wr_ldap_uri }}' }
+      - { regexp: 'SCHEME=', replace: 'SCHEME=https' }
 
   - name: 'WR Install Remote Browsers'
     docker_image:
