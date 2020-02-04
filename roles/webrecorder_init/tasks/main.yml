@@ -28,11 +28,6 @@
       - { regexp: 'LDAP_URI=', replace: 'LDAP_URI={{ wr_ldap_uri }}' }
       - { regexp: 'LDAP_DOMAIN=', replace: 'LDAP_DOMAIN={{ wr_ldap_domain }}' }
 
-  - name: 'WR Install Remote Browsers'
-    docker_image:
-      name: 'oldwebtoday/{{ item }}'
-
-    with_items: '{{ wr_remote_browsers }}'
 
   - name: 'WR Run Docker Compose'
     become: true
