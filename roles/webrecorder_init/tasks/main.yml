@@ -27,7 +27,8 @@
       - { regexp: 'SCHEME=', replace: 'SCHEME=https' }
       - { regexp: 'LDAP_URI=', replace: 'LDAP_URI={{ wr_ldap_uri }}' }
       - { regexp: 'LDAP_DOMAIN=', replace: 'LDAP_DOMAIN={{ wr_ldap_domain }}' }
-
+      - { regexp: 'LDAP_BASE=', replace: 'LDAP_BASE={{ wr_ldap_base }}' }
+      - { regexp: 'LDAP_ADMIN_GROUP=', replace: 'LDAP_ADMIN_GROUP={{ wr_ldap_admin_group }}' }
 
   - name: 'WR Run Docker Compose'
     become: true
