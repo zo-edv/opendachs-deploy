@@ -14,6 +14,7 @@
     wr_ldap_login_group: 'CN=CATS_Users_IT-WebrecorderUsers,OU=IT-Groups,OU=Groups,OU=cats,OU=Institute,DC=ad,DC=uni-heidelberg,DC=de'
     wr_review_mail: 'benedikt.koblenz@zo.uni-heidelberg.de'
     wr_smtp_url: 'ssl://mail.urz.uni-heidelberg.de:587'
+    wr_mail_sender: 'webrecorder@zo.uni-heidelberg.de'
 
     wr_remote_browsers:
       - 'chrome:53'
