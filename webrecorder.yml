@@ -3,8 +3,6 @@
   vars:
     wr_repo: 'https://github.com/zo-edv/webrecorder'
     wr_dir: /opt/webrecorder
-    wr_app_host: 'wr-app.cats.uni-heidelberg.de'
-    wr_content_host: 'wr-content.cats.uni-heidelberg.de'
 
     wr_ldap_domain: 'ad.uni-heidelberg.de'
     wr_ldap_uri: 'ldap://{{ wr_ldap_domain }}'
