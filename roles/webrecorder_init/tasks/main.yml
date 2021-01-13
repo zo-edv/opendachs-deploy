@@ -31,7 +31,7 @@
       - { regexp: 'LDAP_ADMIN_GROUP=', replace: 'LDAP_ADMIN_GROUP={{ wr_ldap_admin_group }}' }
       - { regexp: 'LDAP_LOGIN_GROUP=', replace: 'LDAP_LOGIN_GROUP={{ wr_ldap_login_group }}' }
       - { regexp: 'REVIEWER_EMAIL=', replace: 'REVIEWER_EMAIL={{ wr_review_mail }}' }
-      - { regexp: 'SMTP_URL=', replace: 'SMTP_URL={{ wr_smtp_url }}' }
+      - { regexp: 'SMTP_URL=', replace: 'EMAIL_SMTP_URL={{ wr_smtp_url }}' }
       - { regexp: 'EMAIL_SENDER=', replace: 'EMAIL_SENDER={{ wr_mail_sender }}' }
 
   - name: 'WR Run Docker Compose'
