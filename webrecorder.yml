@@ -12,6 +12,7 @@
     wr_review_mail: 'benedikt.koblenz@zo.uni-heidelberg.de'
     wr_smtp_url: 'starttls://anonymous@localhost:anonymous@mail.urz.uni-heidelberg.de:587'
     wr_mail_sender: 'webrecorder@zo.uni-heidelberg.de'
+    wr_NODE_ENV: 'production'
 
     wr_remote_browsers:
       - 'chrome:53'

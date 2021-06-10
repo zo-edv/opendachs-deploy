@@ -33,6 +33,7 @@
       - { regexp: 'REVIEWER_EMAIL=', replace: 'REVIEWER_EMAIL={{ wr_review_mail }}' }
       - { regexp: 'SMTP_URL=', replace: 'EMAIL_SMTP_URL={{ wr_smtp_url }}' }
       - { regexp: 'EMAIL_SENDER=', replace: 'EMAIL_SENDER={{ wr_mail_sender }}' }
+      - { regexp: 'NODE_ENV=', replace: 'NODE_ENV={{ wr_NODE_ENV }}' }
 
   - name: 'WR Run Docker Compose'
     become: true
