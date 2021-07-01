@@ -1,12 +1,11 @@
-tasks:
-  - name: 'check the current symlink'
+- name: 'check the current symlink'
     stat: 
         path: '{{ wr_dir }}/data/webarchivedata'
     register: webarchivedata
 
 
 
-  - name: Create a symbolic link
+- name: Create a symbolic link
     ansible.builtin.file:
         src: /opt/webarchivedata
         dest: '{{ wr_dir }}/data/webarchivedata'
