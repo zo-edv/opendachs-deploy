@@ -6,7 +6,6 @@
 
   - name: 'Create a symbolic link'
     ansible.builtin.file:
-      path: '{{ wr_dir }}/wr.env'
       src: /opt/webarchivedata
       dest: '{{ wr_dir }}/data/webarchivedata'
       owner: root
