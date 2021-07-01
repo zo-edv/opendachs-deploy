@@ -1,5 +1,5 @@
   - name: 'check the current symlink'
-    stat:
+    ansible.builtin.stat:
       path: '{{ wr_dir }}/data/webarchivedata'
     register: webarchivedata
 
@@ -11,4 +11,4 @@
       owner: root
       group: root
       state: link
-    when: webarchivedata.stat.islnk is defined and webarchivedata.stat.islnk
+    when: webarchivedata.stat.islnk is not defined
