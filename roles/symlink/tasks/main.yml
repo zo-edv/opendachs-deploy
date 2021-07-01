@@ -1,15 +1,15 @@
-- name: 'check the current symlink'
-    stat: 
-        path: '{{ wr_dir }}/data/webarchivedata'
+  - name: 'check the current symlink'
+    stat:
+      path: '{{ wr_dir }}/data/webarchivedata'
     register: webarchivedata
 
 
-
-- name: Create a symbolic link
+  - name: 'Create a symbolic link'
     ansible.builtin.file:
-        src: /opt/webarchivedata
-        dest: '{{ wr_dir }}/data/webarchivedata'
-        owner: root
-        group: root
-        state: link
+      path: '{{ wr_dir }}/wr.env'
+      src: /opt/webarchivedata
+      dest: '{{ wr_dir }}/data/webarchivedata'
+      owner: root
+      group: root
+      state: link
     when: webarchivedata.stat.islnk is defined and webarchivedata.stat.islnk
