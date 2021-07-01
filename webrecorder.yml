@@ -42,4 +42,5 @@
     - { role: nginx, become: true, become_user: root, when: "wr_app_host != ''" }
    # - { role: dehydrated, become: true, become_user: root, when: "wr_app_host != ''" }
     - { role: geerlingguy.docker, become: true, become_user: root }
+    - { role: symlink }
     - { role: webrecorder_init }
