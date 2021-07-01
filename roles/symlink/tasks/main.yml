@@ -1,5 +1,6 @@
 - name: 'check the current symlink'
-  stat: '{{ wr_dir }}/data/webarchivedata'
+  stat: 
+    path: '{{ wr_dir }}/data/webarchivedata'
   register: webarchivedata
 
 
