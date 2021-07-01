@@ -1,15 +1,16 @@
-- name: 'check the current symlink'
-  stat: 
-    path: '{{ wr_dir }}/data/webarchivedata'
-  register: webarchivedata
+tasks:
+  - name: 'check the current symlink'
+    stat: 
+        path: '{{ wr_dir }}/data/webarchivedata'
+    register: webarchivedata
 
 
 
-- name: Create a symbolic link
-  ansible.builtin.file:
-    src: /opt/webarchivedata
-    dest: '{{ wr_dir }}/data/webarchivedata'
-    owner: root
-    group: root
-    state: link
-    when: webarchivedata.stat.exists == False
+  - name: Create a symbolic link
+    ansible.builtin.file:
+        src: /opt/webarchivedata
+        dest: '{{ wr_dir }}/data/webarchivedata'
+        owner: root
+        group: root
+        state: link
+    when: webarchivedata.stat.islnk is defined and webarchivedata.stat.islnk
